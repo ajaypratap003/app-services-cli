@@ -15,6 +15,7 @@ type DynamicServiceConstants struct {
 type AmsConfig struct {
 	TermsAndConditionsEventCode string `json:"termsAndConditionsEventCode"`
 	TermsAndConditionsSiteCode  string `json:"termsAndConditionsSiteCode"`
-	InstanceQuotaID             string `json:"instanceQuotaId"`
-	TrialQuotaID                string `json:"trialQuotaId"`
+	QuotaProductId              string `json:"quotaProductId"`
+	TrialQuotaProductId         string `json:"trialQuotaProductId"`
+	ResourceName                string `json:"resourceName"`
 }

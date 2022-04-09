@@ -50,13 +50,17 @@ func GetUserSupportedInstanceTypes(ctx context.Context, spec remote.AmsConfig, c
 
 	var quotas []string
 	for _, quota := range quotaCostGet.GetItems() {
-		quotaId := strings.TrimSpace(quota.GetQuotaId())
+		for _, relatedResources := range quota.GetRelatedResources() {
+			Product := strings.TrimSpace(relatedResources.GetProduct())
+			ResouceName := strings.TrimSpace(relatedResources.GetResourceName())
 
-		if quotaId == spec.TrialQuotaID {
-			quotas = append(quotas, QuotaTrialType)
-		}
-		if quotaId == spec.InstanceQuotaID {
-			quotas = append(quotas, QuotaStandardType)
+			if Product == spec.QuotaProductId && ResouceName == spec.ResourceName {
+				quotas = append(quotas, QuotaStandardType)
+			}
+
+			if Product == spec.TrialQuotaProductId && ResouceName == spec.ResourceName {
+				quotas = append(quotas, QuotaTrialType)
+			}
 		}
 	}
 
